@@ -1,0 +1,10 @@
+{
+  "hello": "Bonjour",
+  "bText_sentiers": "Découvrir d'autres sentiers",
+  "infoModal_title": "Informations",
+  "infoModal_heading": "Le casque de Réalité Virtuelle",
+  "infoModal_content": "L'Oculus Go est un casque de réalité virtuelle autonome développé par Facebook Technologies en partenariat avec Qualcomm et Xiaomi. Il fait partie de la première génération de casques de réalité virtuelle de Facebook Technologies, et est le premier appareil de la société dans la catégorie des casques de réalité virtuelle autonomes, qui était une nouvelle catégorie au moment de la sortie du Go. L'Oculus Go a été dévoilé le 11 octobre 2017 lors de la conférence des développeurs Oculus Connect, et lancé le 1er mai 2018. Xiaomi a lancé sa propre version du casque en Chine sous le nom de Mi VR Standalone le 31 mai 2018.",
+  "creditModal_title": "Crédits",
+  "creditModal_heading": "Remerciements",
+  "creditModal_content": "Acteurs impliqués"
+}

@@ -1,5 +1,8 @@
 <template>
   <div class="accueil">
+    <v-btn fab large @click="displayCredits()" class="btnCredit">
+      <v-icon large>mdi-copyright</v-icon>
+    </v-btn>
     <v-btn
       depressed
       height="64px"
@@ -44,7 +47,8 @@
       v-if="!displayBtn"
       class="btnDisplay"
     >
-      Découvrir d'autres sentiers
+      <!-- Découvrir d'autres sentiers -->
+      {{ $t("bText_sentiers") }}
     </v-btn>
     <v-btn fab large @click="displayInfos()" class="btnInfo">
       <v-icon large>mdi-information-variant</v-icon>
@@ -60,49 +64,36 @@
       >
         <v-list-item three-line light>
           <v-list-item-content light>
-            <div class="overline mb-4" light>Informations</div>
-            <v-list-item-title class="headline mb-1" light
-              >Le casque de Réalité Virtuelle</v-list-item-title
-            >
-            <v-list-item-subtitle light class="text-nowrap"
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Excepturi rem itaque laborum at. Fuga unde sint asperiores
-              laboriosam quis facilis sit maxime recusandae quo ullam sunt,
-              cupiditate consequuntur aspernatur eveniet. Lorem ipsum dolor sit
-              amet consectetur adipisicing elit. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Excepturi rem itaque laborum at.
-              Fuga unde sint asperiores laboriosam quis facilis sit maxime
-              recusandae quo ullam sunt, cupiditate consequuntur aspernatur
-              eveniet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
-              rem itaque laborum at. Fuga unde sint asperiores laboriosam quis
-              facilis sit maxime recusandae quo ullam sunt, cupiditate
-              consequuntur aspernatur eveniet. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Excepturi rem itaque laborum at.
-              Fuga unde sint asperiores laboriosam quis facilis sit maxime
-              recusandae quo ullam sunt, cupiditate consequuntur aspernatur
-              eveniet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
-              rem itaque laborum at. Fuga unde sint asperiores laboriosam quis
-              facilis sit maxime recusandae quo ullam sunt, cupiditate
-              consequuntur aspernatur eveniet. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Excepturi rem itaque laborum at.
-              Fuga unde sint asperiores laboriosam quis facilis sit maxime
-              recusandae quo ullam sunt, cupiditate consequuntur aspernatur
-              eveniet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
-              rem itaque laborum at. Fuga unde sint asperiores laboriosam quis
-              facilis sit maxime recusandae quo ullam sunt, cupiditate
-              consequuntur aspernatur eveniet. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Excepturi rem itaque laborum at.
-              Fuga unde sint asperiores laboriosam quis facilis sit maxime
-              recusandae quo ullam sunt, cupiditate consequuntur aspernatur
-              eveniet. Lorem ipsum dolor sit amet consectetur adipisicing
-              elit.</v-list-item-subtitle
-            >
+            <div class="overline mb-4" light>{{ $t("infoModal_title") }}</div>
+            <v-list-item-title class="headline mb-1" light>{{
+              $t("infoModal_heading")
+            }}</v-list-item-title>
+            <v-list-item-subtitle light class="text-nowrap">{{
+              $t("infoModal_content")
+            }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card>
+    </v-overlay>
+
+    <v-overlay :absolute="absolute" :value="displayCredit" light>
+      <v-card
+        class="mx-auto"
+        max-width="50vw"
+        outlined
+        light
+        v-on-clickaway="displayCredits"
+        @click="displayCredits"
+      >
+        <v-list-item three-line light>
+          <v-list-item-content light>
+            <div class="overline mb-4" light>{{ $t("creditModal_title") }}</div>
+            <v-list-item-title class="headline mb-1" light>{{
+              $t("creditModal_heading")
+            }}</v-list-item-title>
+            <v-list-item-subtitle light class="text-nowrap">{{
+              $t("creditModal_content")
+            }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-card>
@@ -126,6 +117,7 @@ export default {
     return {
       displayBtn: false,
       displayInfo: false,
+      displayCredit: false,
       absolute: true,
       images: {
         corsica: require("../assets/images/squareCorsica.png"),
@@ -142,18 +134,13 @@ export default {
     displayInfos() {
       this.displayInfo = !this.displayInfo;
     },
+    displayCredits() {
+      this.displayCredit = !this.displayCredit;
+    },
     swapLanguage(selectedLang) {
-      if (selectedLang === "fr") {
-        console.log("Langue choisie : Français");
-        this.lang = 0;
-      } else if (selectedLang === "co") {
-        console.log("Langue choisie : Corse");
-        this.lang = 1;
-      } else if (selectedLang === "it") {
-        console.log("Langue choisie : Italien");
-        this.lang = 2;
-      } else {
-        console.log("Erreur");
+      if (this.$i18n.locale !== selectedLang) {
+        this.$i18n.locale = selectedLang;
+        console.log("La langue a bien été changée en " + selectedLang + " !");
       }
     },
   },
@@ -183,6 +170,12 @@ export default {
   bottom: 20vh;
   height: 66px !important;
   min-width: 350px !important;
+}
+
+.btnCredit {
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
 
 .btnInfo {
