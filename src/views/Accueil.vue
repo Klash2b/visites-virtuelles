@@ -174,7 +174,7 @@ export default {
 
 .btnCredit {
   position: absolute;
-  top: 20px;
+  bottom: 20px;
   left: 20px;
 }
 
