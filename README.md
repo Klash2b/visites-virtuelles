@@ -1,3 +1,5 @@
+/!\ Version non finale /!\
+
 # visites-virtuelles
 
 > Application permettant d'effectuer des visites virtuelles des sentiers du patrimoine en Corse.
